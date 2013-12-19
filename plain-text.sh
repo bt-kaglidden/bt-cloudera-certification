@@ -8,7 +8,6 @@ set -e
 
 BT_BUILD=amd64-glibc25-gcc41
 BT_COMMON_VER=20
-BT_RLP_LUCENE_VER=L43S43-7.10
 BT_RLP_VER=7.10
 BT_ROOT=/opt/rlp_7.10
 DATASET=plain-text
@@ -26,14 +25,13 @@ if [ ! -e /var/lib/cloudera-demovm/${DATASET}-generate.done ]; then
      cat $SCHEMA_XML | \
           sed -e "s|\[\[BT_ROOT\]\]|$BT_ROOT|g" \
           > $INSTANCE_DIR/conf/schema.xml
-     cat $SOLRCONFIG_XML | \
-          sed -e "s|\[\[BT_BUILD\]\]|$BT_BUILD|g" | \
-          sed -e "s|\[\[BT_COMMON_VER\]\]|$BT_COMMON_VER|g" | \
-          sed -e "s|\[\[BT_RLP_LUCENE_VER\]\]|$BT_RLP_LUCENE_VER|g" | \
-          sed -e "s|\[\[BT_RLP_VER\]\]|$BT_RLP_VER|g" | \
-          sed -e "s|\[\[BT_ROOT\]\]|$BT_ROOT|g" | \
-          sed -e "s|\[\[SLF4J_VER\]\]|$SLF4J_VER|g" \
-          > $INSTANCE_DIR/conf/solrconfig.xml
+     # cat $SOLRCONFIG_XML | \
+     #      sed -e "s|\[\[BT_BUILD\]\]|$BT_BUILD|g" | \
+     #      sed -e "s|\[\[BT_COMMON_VER\]\]|$BT_COMMON_VER|g" | \
+     #      sed -e "s|\[\[BT_RLP_VER\]\]|$BT_RLP_VER|g" | \
+     #      sed -e "s|\[\[BT_ROOT\]\]|$BT_ROOT|g" | \
+     #      sed -e "s|\[\[SLF4J_VER\]\]|$SLF4J_VER|g" \
+     #      > $INSTANCE_DIR/conf/solrconfig.xml
     sudo touch /var/lib/cloudera-demovm/${DATASET}-generate.done
 fi
 
@@ -63,7 +61,7 @@ solrctl collection --deletedocs $DATASET
 hadoop --config /etc/hadoop/conf.cloudera.mapreduce1 \
     jar /usr/lib/solr/contrib/mr/search-mr-*-job.jar \
     org.apache.solr.hadoop.MapReduceIndexerTool \
-    -D "mapred.child.java.opts=-Xmx500m -Dbt.root=${BT_ROOT}" \
+    -D "mapred.child.java.opts=-Xmx500m -Dbt.root=${BT_ROOT} -DsharedLib=${BT_ROOT}/solrSharedLib" \
     --log4j /usr/share/doc/search*/examples/solr-nrt/log4j.properties \
     --morphline-file /home/cloudera/work/bt-cloudera-certification/ReadPlainText.conf \
     --output-dir hdfs://localhost.localdomain:8020/user/cloudera/${DATASET}_outdir \
