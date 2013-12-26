@@ -107,22 +107,7 @@
    -->
         
    <field name="id" type="string" indexed="true" stored="true" required="true" multiValued="false" /> 
-   <field name="user_friends_count" type="tint" indexed="true" stored="true" />
-   <field name="user_location" type="lowercase" indexed="true" stored="true" />
-   <field name="user_description" type="text_en" indexed="true" stored="false"/>
-   <field name="user_statuses_count" type="tint" indexed="true" stored="true" />
-   <field name="user_followers_count" type="tint" indexed="true" stored="true"/>
-   <field name="user_name" type="text_en" indexed="true" stored="true" />
-   <field name="user_screen_name" type="text_en" indexed="true" stored="true" />
-   <field name="created_at" type="tdate" indexed="true" stored="true" />
    <field name="text" type="english-full" indexed="true" stored="true" />
-   <field name="retweet_count" type="tint" indexed="true" stored="true" />
-   <field name="retweeted" type="boolean" indexed="true" stored="false" />
-   <field name="in_reply_to_user_id" type="long" indexed="true" stored="true" />
-   <field name="source" type="lowercase" indexed="true" stored="true" />
-   <field name="in_reply_to_status_id" type="long" indexed="true" stored="true" multiValued="true"/>
-   <field name="media_url_https" type="string" indexed="false" stored="true" />
-   <field name="expanded_url" type="string" indexed="false" stored="true" />
 
    <!-- file metadata -->   
    <field name="file_download_url" type="string" indexed="false" stored="true" />
