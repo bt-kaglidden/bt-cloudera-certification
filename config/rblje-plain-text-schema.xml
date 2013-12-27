@@ -1037,21 +1037,21 @@
         </fieldtype>
 
 <!-- ModelDirectory not fully functional in RBL-JE 2.x.  Comment our languages that need it for now. -->
-        <!-- <fieldtype name="chinese-full" class="solr.TextField"> -->
-        <!--     <analyzer> -->
-        <!--         <tokenizer class="com.basistech.rosette.lucene.BaseLinguisticsTokenizerFactory" -->
-        <!--                    language="zhs" -->
-        <!--                    licensePath="[[bt.license.path]]" -->
-        <!--                    modelDirectory="[[bt.model.directory]]" -->
-        <!--                 /> -->
-        <!--         > -->
-        <!--         <filter class="com.basistech.rosette.lucene.BaseLinguisticsTokenFilterFactory" -->
-        <!--                 language="zhs" -->
-        <!--                 licensePath="[[bt.license.path]]" -->
-        <!--                 dictionaryDirectory="[[bt.dictionary.directory]]" -->
-        <!--                 addLemmaTokens="true"/> -->
-        <!--     </analyzer> -->
-        <!-- </fieldtype> -->
+        <fieldtype name="chinese-full" class="solr.TextField">
+            <analyzer>
+                <tokenizer class="com.basistech.rosette.lucene.BaseLinguisticsTokenizerFactory"
+                           language="zhs"
+                           licensePath="[[bt.license.path]]"
+                           modelDirectory="[[bt.model.directory]]"
+                        />
+                >
+                <filter class="com.basistech.rosette.lucene.BaseLinguisticsTokenFilterFactory"
+                        language="zhs"
+                        licensePath="[[bt.license.path]]"
+                        dictionaryDirectory="[[bt.dictionary.directory]]"
+                        addLemmaTokens="true"/>
+            </analyzer>
+        </fieldtype>
 
 <!-- ICU libraries appear unavialble in CDH4 -->
         <!-- <fieldtype name="chinese-full-icu" class="solr.TextField"> -->
@@ -1071,39 +1071,37 @@
         <!--     </analyzer> -->
         <!-- </fieldtype> -->
 
-<!-- ModelDirectory not fully functional in RBL-JE 2.x.  Comment our languages that need it for now. -->
-        <!-- <fieldtype name="japanese-full" class="solr.TextField"> -->
-        <!--     <analyzer> -->
-        <!--         <tokenizer class="com.basistech.rosette.lucene.BaseLinguisticsTokenizerFactory" -->
-        <!--                    language="jpn" -->
-        <!--                    licensePath="[[bt.license.path]]" -->
-        <!--                    modelDirectory="[[bt.model.directory]]" -->
-        <!--                 /> -->
-        <!--         > -->
-        <!--         <filter class="com.basistech.rosette.lucene.BaseLinguisticsTokenFilterFactory" -->
-        <!--                 language="jpn" -->
-        <!--                 licensePath="[[bt.license.path]]" -->
-        <!--                 dictionaryDirectory="[[bt.dictionary.directory]]" -->
-        <!--                 addLemmaTokens="true"/> -->
-        <!--     </analyzer> -->
-        <!-- </fieldtype> -->
+        <fieldtype name="japanese-full" class="solr.TextField">
+            <analyzer>
+                <tokenizer class="com.basistech.rosette.lucene.BaseLinguisticsTokenizerFactory"
+                           language="jpn"
+                           licensePath="[[bt.license.path]]"
+                           modelDirectory="[[bt.model.directory]]"
+                        />
+                >
+                <filter class="com.basistech.rosette.lucene.BaseLinguisticsTokenFilterFactory"
+                        language="jpn"
+                        licensePath="[[bt.license.path]]"
+                        dictionaryDirectory="[[bt.dictionary.directory]]"
+                        addLemmaTokens="true"/>
+            </analyzer>
+        </fieldtype>
 
-<!-- ModelDirectory not fully functional in RBL-JE 2.x.  Comment our languages that need it for now. -->
-        <!-- <fieldtype name="korean-full" class="solr.TextField"> -->
-        <!--     <analyzer> -->
-        <!--         <tokenizer class="com.basistech.rosette.lucene.BaseLinguisticsTokenizerFactory" -->
-        <!--                    language="kor" -->
-        <!--                    licensePath="[[bt.license.path]]" -->
-        <!--                    modelDirectory="[[bt.model.directory]]" -->
-        <!--                 /> -->
-        <!--         > -->
-        <!--         <filter class="com.basistech.rosette.lucene.BaseLinguisticsTokenFilterFactory" -->
-        <!--                 language="kor" -->
-        <!--                 licensePath="[[bt.license.path]]" -->
-        <!--                 dictionaryDirectory="[[bt.dictionary.directory]]" -->
-        <!--                 addLemmaTokens="true"/> -->
-        <!--     </analyzer> -->
-        <!-- </fieldtype> -->
+        <fieldtype name="korean-full" class="solr.TextField">
+            <analyzer>
+                <tokenizer class="com.basistech.rosette.lucene.BaseLinguisticsTokenizerFactory"
+                           language="kor"
+                           licensePath="[[bt.license.path]]"
+                           modelDirectory="[[bt.model.directory]]"
+                        />
+                >
+                <filter class="com.basistech.rosette.lucene.BaseLinguisticsTokenFilterFactory"
+                        language="kor"
+                        licensePath="[[bt.license.path]]"
+                        dictionaryDirectory="[[bt.dictionary.directory]]"
+                        addLemmaTokens="true"/>
+            </analyzer>
+        </fieldtype>
 
 <!-- ModelDirectory not fully functional in RBL-JE 2.x.  Comment our languages that need it for now. -->
         <!-- <fieldtype name="arabic-full" class="solr.TextField"> -->

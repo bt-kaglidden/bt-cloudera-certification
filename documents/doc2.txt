@@ -1,2 +1,2 @@
 File-Name: <doc2.txt>
-This is a document for celebrities.
+The celebrities spoke at the convention.

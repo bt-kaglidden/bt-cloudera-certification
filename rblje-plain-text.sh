@@ -57,7 +57,11 @@ hadoop fs -mkdir -p /user/cloudera/${DATASET}_indir
 hadoop fs -mkdir -p /user/cloudera/${DATASET}_outdir
 
 hadoop fs -copyFromLocal \
-    /home/cloudera/work/bt-cloudera-certification/documents/*.txt \
+    /home/cloudera/work/bt-cloudera-certification/documents/doc*.txt \
+    /user/cloudera/${DATASET}_indir/
+
+hadoop fs -copyFromLocal \
+    /home/cloudera/work/bt-cloudera-certification/documents/*_ENG_*.txt \
     /user/cloudera/${DATASET}_indir/
 
 solrctl collection --deletedocs $DATASET
@@ -66,7 +70,7 @@ hadoop --config /etc/hadoop/conf.cloudera.mapreduce1 \
     org.apache.solr.hadoop.MapReduceIndexerTool \
     -D "mapred.child.java.opts=-Xmx500m" \
     --log4j /usr/share/doc/search*/examples/solr-nrt/log4j.properties \
-    --morphline-file /home/cloudera/work/bt-cloudera-certification/ReadPlainText.conf \
+    --morphline-file /home/cloudera/work/bt-cloudera-certification/config/${DATASET}-morphlines.conf \
     --output-dir hdfs://localhost.localdomain:8020/user/cloudera/${DATASET}_outdir \
     --verbose --go-live \
     --zk-host localhost.localdomain:2181/solr \
