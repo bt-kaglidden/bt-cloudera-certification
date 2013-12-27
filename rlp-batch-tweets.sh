@@ -14,7 +14,8 @@ BT_ROOT=/opt/rlp_7.10
 DATASET=bt-batch-tweets
 SLF4J_VER=1.6.4
 
-TEMPLATE_DIR=/home/cloudera/work/bt-cloudera-certification/config
+ROOT_DIR=/home/cloudera/work/basis-cloudera-tests
+TEMPLATE_DIR=$ROOT_DIR/config
 SCHEMA_XML=$TEMPLATE_DIR/${DATASET}-schema.xml
 SOLRCONFIG_XML=$TEMPLATE_DIR/${DATASET}-solrconfig.xml
 INSTANCE_DIR=/home/cloudera/${DATASET}_configs
