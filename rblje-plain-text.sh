@@ -14,7 +14,8 @@ RBLJE_ROOT=/opt/rblje-$RBLJE_VER
 SLF4J_VER=1.6.3
 LICENSE_FILE_PATH=$RBLJE_ROOT/rbl-je-$RBLJE_VER/licenses/rlp-license.xml
 
-TEMPLATE_DIR=/home/cloudera/work/bt-cloudera-certification/config
+ROOT_DIR=/home/cloudera/work/basis-cloudera-tests
+TEMPLATE_DIR=$ROOT_DIR/config
 SCHEMA_XML=$TEMPLATE_DIR/${DATASET}-schema.xml
 SOLRCONFIG_XML=$TEMPLATE_DIR/${DATASET}-solrconfig.xml
 INSTANCE_DIR=/home/cloudera/${DATASET}_configs
@@ -57,11 +58,11 @@ hadoop fs -mkdir -p /user/cloudera/${DATASET}_indir
 hadoop fs -mkdir -p /user/cloudera/${DATASET}_outdir
 
 hadoop fs -copyFromLocal \
-    /home/cloudera/work/bt-cloudera-certification/documents/doc*.txt \
+    $ROOT_DIR/documents/doc*.txt \
     /user/cloudera/${DATASET}_indir/
 
 hadoop fs -copyFromLocal \
-    /home/cloudera/work/bt-cloudera-certification/documents/*_ENG_*.txt \
+    $ROOT_DIR/documents/*_ENG_*.txt \
     /user/cloudera/${DATASET}_indir/
 
 solrctl collection --deletedocs $DATASET
@@ -70,7 +71,7 @@ hadoop --config /etc/hadoop/conf.cloudera.mapreduce1 \
     org.apache.solr.hadoop.MapReduceIndexerTool \
     -D "mapred.child.java.opts=-Xmx500m" \
     --log4j /usr/share/doc/search*/examples/solr-nrt/log4j.properties \
-    --morphline-file /home/cloudera/work/bt-cloudera-certification/config/${DATASET}-morphlines.conf \
+    --morphline-file $ROOT_DIR/config/${DATASET}-morphlines.conf \
     --output-dir hdfs://localhost.localdomain:8020/user/cloudera/${DATASET}_outdir \
     --verbose --go-live \
     --zk-host localhost.localdomain:2181/solr \

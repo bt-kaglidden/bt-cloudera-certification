@@ -14,7 +14,8 @@ RBLJE_ROOT=/opt/rblje-$RBLJE_VER
 SLF4J_VER=1.6.3
 LICENSE_FILE_PATH=$RBLJE_ROOT/rbl-je-$RBLJE_VER/licenses/rlp-license.xml
 
-TEMPLATE_DIR=/home/cloudera/work/bt-cloudera-certification/config
+ROOT_DIR=/home/cloudera/work/basis-cloudera-tests
+TEMPLATE_DIR=$ROOT_DIR/config
 SCHEMA_XML=$TEMPLATE_DIR/${DATASET}-schema.xml
 SOLRCONFIG_XML=$TEMPLATE_DIR/${DATASET}-solrconfig.xml
 INSTANCE_DIR=/home/cloudera/${DATASET}_configs
