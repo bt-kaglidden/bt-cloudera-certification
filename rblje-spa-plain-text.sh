@@ -58,6 +58,11 @@ set -e
 hadoop fs -mkdir -p /user/cloudera/${DATASET}_indir
 hadoop fs -mkdir -p /user/cloudera/${DATASET}_outdir
 
+hadoop fs -copyFromLocal \
+    $ROOT_DIR/documents/Spanish-*.txt \
+    /user/cloudera/${DATASET}_indir/
+
+set +e
 #
 # TODO
 # The files names here are specific to a proprietay Basis corpus.
@@ -66,6 +71,7 @@ hadoop fs -mkdir -p /user/cloudera/${DATASET}_outdir
 hadoop fs -copyFromLocal \
     $ROOT_DIR/documents/*_SPA_*.txt \
     /user/cloudera/${DATASET}_indir/
+set -e
 
 solrctl collection --deletedocs $DATASET
 hadoop --config /etc/hadoop/conf.cloudera.mapreduce1 \

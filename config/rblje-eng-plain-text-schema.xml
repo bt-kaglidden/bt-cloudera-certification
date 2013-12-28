@@ -107,7 +107,7 @@
    -->
         
    <field name="id" type="string" indexed="true" stored="true" required="true" multiValued="false" /> 
-   <field name="text" type="english-full" indexed="true" stored="true" />
+   <field name="text" type="english-basis" indexed="true" stored="true" />
 
    <!-- file metadata -->   
    <field name="file_download_url" type="string" indexed="false" stored="true" />
@@ -931,7 +931,7 @@
     </fieldType>
 
 <!-- Start:Basis RBL-JE field types -->
-        <fieldtype name="english-full" class="solr.TextField">
+        <fieldtype name="english-basis" class="solr.TextField">
             <analyzer>
                 <tokenizer class="com.basistech.rosette.lucene.BaseLinguisticsTokenizerFactory"
                            language="eng"
@@ -946,7 +946,7 @@
             </analyzer>
         </fieldtype>
 
-        <fieldtype name="french-full" class="solr.TextField">
+        <fieldtype name="french-basis" class="solr.TextField">
             <analyzer>
                 <tokenizer class="com.basistech.rosette.lucene.BaseLinguisticsTokenizerFactory"
                            language="fra"
@@ -961,7 +961,22 @@
             </analyzer>
         </fieldtype>
 
-        <fieldtype name="german-full" class="solr.TextField">
+        <fieldtype name="spanish-basis" class="solr.TextField">
+            <analyzer>
+                <tokenizer class="com.basistech.rosette.lucene.BaseLinguisticsTokenizerFactory"
+                           language="spa"
+                           licensePath="[[bt.license.path]]"
+                        />
+                >
+                <filter class="com.basistech.rosette.lucene.BaseLinguisticsTokenFilterFactory"
+                        language="spa"
+                        licensePath="[[bt.license.path]]"
+                        dictionaryDirectory="[[bt.dictionary.directory]]"
+                        addLemmaTokens="true"/>
+            </analyzer>
+        </fieldtype>
+
+        <fieldtype name="german-basis" class="solr.TextField">
             <analyzer>
                 <tokenizer class="com.basistech.rosette.lucene.BaseLinguisticsTokenizerFactory"
                            language="deu"
@@ -976,7 +991,7 @@
             </analyzer>
         </fieldtype>
 
-        <fieldtype name="danish-full" class="solr.TextField">
+        <fieldtype name="danish-basis" class="solr.TextField">
             <analyzer>
                 <tokenizer class="com.basistech.rosette.lucene.BaseLinguisticsTokenizerFactory"
                            language="dan"
@@ -991,7 +1006,7 @@
             </analyzer>
         </fieldtype>
 
-        <fieldtype name="russian-full" class="solr.TextField">
+        <fieldtype name="russian-basis" class="solr.TextField">
             <analyzer>
                 <tokenizer class="com.basistech.rosette.lucene.BaseLinguisticsTokenizerFactory"
                            language="rus"
@@ -1006,7 +1021,7 @@
             </analyzer>
         </fieldtype>
 
-        <fieldtype name="polish-full" class="solr.TextField">
+        <fieldtype name="polish-basis" class="solr.TextField">
             <analyzer>
                 <tokenizer class="com.basistech.rosette.lucene.BaseLinguisticsTokenizerFactory"
                            language="pol"
@@ -1021,7 +1036,7 @@
             </analyzer>
         </fieldtype>
 
-        <fieldtype name="greek-full" class="solr.TextField">
+        <fieldtype name="greek-basis" class="solr.TextField">
             <analyzer>
                 <tokenizer class="com.basistech.rosette.lucene.BaseLinguisticsTokenizerFactory"
                            language="ell"
@@ -1036,8 +1051,7 @@
             </analyzer>
         </fieldtype>
 
-<!-- ModelDirectory not fully functional in RBL-JE 2.x.  Comment our languages that need it for now. -->
-        <fieldtype name="chinese-full" class="solr.TextField">
+        <fieldtype name="chinese-basis" class="solr.TextField">
             <analyzer>
                 <tokenizer class="com.basistech.rosette.lucene.BaseLinguisticsTokenizerFactory"
                            language="zhs"
@@ -1053,25 +1067,7 @@
             </analyzer>
         </fieldtype>
 
-<!-- ICU libraries appear unavialble in CDH4 -->
-        <!-- <fieldtype name="chinese-full-icu" class="solr.TextField"> -->
-        <!--     <analyzer> -->
-        <!--         <tokenizer class="com.basistech.rosette.lucene.BaseLinguisticsTokenizerFactory" -->
-        <!--                    language="zhs" -->
-        <!--                    licensePath="[[bt.license.path]]" -->
-        <!--                    modelDirectory="[[bt.model.directory]]" -->
-        <!--                 /> -->
-        <!--         > -->
-        <!--         <filter class="org.apache.lucene.analysis.icu.ICUNormalizer2FilterFactory"/> -->
-        <!--         <filter class="com.basistech.rosette.lucene.BaseLinguisticsTokenFilterFactory" -->
-        <!--                 language="zhs" -->
-        <!--                 licensePath="[[bt.license.path]]" -->
-        <!--                 dictionaryDirectory="[[bt.dictionary.directory]]" -->
-        <!--                 addLemmaTokens="true"/> -->
-        <!--     </analyzer> -->
-        <!-- </fieldtype> -->
-
-        <fieldtype name="japanese-full" class="solr.TextField">
+        <fieldtype name="japanese-basis" class="solr.TextField">
             <analyzer>
                 <tokenizer class="com.basistech.rosette.lucene.BaseLinguisticsTokenizerFactory"
                            language="jpn"
@@ -1087,7 +1083,7 @@
             </analyzer>
         </fieldtype>
 
-        <fieldtype name="korean-full" class="solr.TextField">
+        <fieldtype name="korean-basis" class="solr.TextField">
             <analyzer>
                 <tokenizer class="com.basistech.rosette.lucene.BaseLinguisticsTokenizerFactory"
                            language="kor"
@@ -1103,42 +1099,6 @@
             </analyzer>
         </fieldtype>
 
-<!-- ModelDirectory not fully functional in RBL-JE 2.x.  Comment our languages that need it for now. -->
-        <!-- <fieldtype name="arabic-full" class="solr.TextField"> -->
-        <!--     <analyzer> -->
-        <!--         <tokenizer class="com.basistech.rosette.lucene.BaseLinguisticsTokenizerFactory" -->
-        <!--                    language="ara" -->
-        <!--                    licensePath="[[bt.license.path]]" -->
-        <!--                    modelDirectory="[[bt.model.directory]]" -->
-        <!--                 /> -->
-        <!--         > -->
-        <!--         <filter class="com.basistech.rosette.lucene.BaseLinguisticsTokenFilterFactory" -->
-        <!--                 language="ara" -->
-        <!--                 licensePath="[[bt.license.path]]" -->
-        <!--                 dictionaryDirectory="[[bt.dictionary.directory]]" -->
-        <!--                 modelDirectory="[[bt.model.directory]]" -->
-        <!--                 addLemmaTokens="true"/> -->
-        <!--     </analyzer> -->
-        <!-- </fieldtype> -->
-
-<!-- ModelDirectory not fully functional in RBL-JE 2.x.  Comment our languages that need it for now. -->
-        <!-- <fieldtype name="arabic-full-roman" class="solr.TextField"> -->
-        <!--     <analyzer> -->
-        <!--         <tokenizer class="com.basistech.rosette.lucene.BaseLinguisticsTokenizerFactory" -->
-        <!--                    language="ara" -->
-        <!--                    licensePath="[[bt.license.path]]" -->
-        <!--                    modelDirectory="[[bt.model.directory]]" -->
-        <!--                 /> -->
-        <!--         > -->
-        <!--         <filter class="com.basistech.rosette.lucene.BaseLinguisticsTokenFilterFactory" -->
-        <!--                 language="ara" -->
-        <!--                 licensePath="[[bt.license.path]]" -->
-        <!--                 dictionaryDirectory="[[bt.dictionary.directory]]" -->
-        <!--                 modelDirectory="[[bt.model.directory]]" -->
-        <!--                 addLemmaTokens="true"/> -->
-        <!--         <filter class="solr.ICUTransformFilterFactory" id="Arabic-Latin"/> -->
-        <!--     </analyzer> -->
-        <!-- </fieldtype> -->
 <!-- End:  Basis RBL-JE field types -->
 
  </types>

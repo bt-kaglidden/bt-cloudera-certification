@@ -8,7 +8,7 @@
 set -e
 
 BT_COMMON_VER=21
-DATASET=rblje-plain-text
+DATASET=rblje-eng-plain-text
 LUCENE_SOLR_VER=4_3
 RBLJE_VER=2.1.0
 RBLJE_ROOT=/opt/rblje-$RBLJE_VER
@@ -58,18 +58,28 @@ set -e
 hadoop fs -mkdir -p /user/cloudera/${DATASET}_indir
 hadoop fs -mkdir -p /user/cloudera/${DATASET}_outdir
 
+hadoop fs -copyFromLocal \
+    $ROOT_DIR/documents/doc*.txt \
+    /user/cloudera/${DATASET}_indir/
+
+hadoop fs -copyFromLocal \
+    $ROOT_DIR/documents/English-*.txt \
+    /user/cloudera/${DATASET}_indir/
+
+set +e
 #
 # TODO
 # The files names here are specific to a proprietay Basis corpus.
 # Change them to suit your test corpus.
 #
 hadoop fs -copyFromLocal \
-    $ROOT_DIR/documents/doc*.txt \
+    $ROOT_DIR/documents/eng-*.txt \
     /user/cloudera/${DATASET}_indir/
 
 hadoop fs -copyFromLocal \
     $ROOT_DIR/documents/*_ENG_*.txt \
     /user/cloudera/${DATASET}_indir/
+set -e
 
 solrctl collection --deletedocs $DATASET
 hadoop --config /etc/hadoop/conf.cloudera.mapreduce1 \
