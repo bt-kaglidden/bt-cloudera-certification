@@ -1,8 +1,9 @@
 #! /usr/bin/env bash
 
-# This script creates a single-shard collection that will use Basis Technology's RLP in Solr
-# and loads a set of artificial/generated tweets into
-# the collection using the MapReduce indexer and GoLive
+# This script creates a single-shard collection that will use Basis Technology's
+# RBL-JE English (ENG) analyzer in Solr.
+# Loads a set of text documents into
+# the collection using the MapReduce indexer and GoLive.
 
 set -e
 
@@ -57,6 +58,11 @@ set -e
 hadoop fs -mkdir -p /user/cloudera/${DATASET}_indir
 hadoop fs -mkdir -p /user/cloudera/${DATASET}_outdir
 
+#
+# TODO
+# The files names here are specific to a proprietay Basis corpus.
+# Change them to suit your test corpus.
+#
 hadoop fs -copyFromLocal \
     $ROOT_DIR/documents/doc*.txt \
     /user/cloudera/${DATASET}_indir/
