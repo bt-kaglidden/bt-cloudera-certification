@@ -1,3 +1,4 @@
+File-Name: <French-01.txt>
 La Société Nationale des Chemins de Fer Français (SNCF) est l'une des principales entreprises publiques françaises, centrée sur le transport ferroviaire.
 
 La forme juridique de la SNCF est celle d'un établissement public à caractère industriel et commercial (EPIC), qui par ailleurs détient des participations majoritaires ou totales dans des sociétés de droit privé regroupées dans le groupe SNCF. Le siège social de la SNCF se trouve à Paris et le siège informatique lui aussi à Paris déménagera à Lyon dès la livraison de la Tour Oxygène.
