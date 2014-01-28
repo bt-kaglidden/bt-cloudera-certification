@@ -4,7 +4,7 @@ h1=. Testing Basis Technology Software with Cloudera Search
 
 h2. Introduction
 
-This document describes describes how to integrate and test "Basis Technology's":http://www.basistech.com/ "Rosette Base Linguistics":http://www.basistech.com/base-linguistics/ for Java (RBL-JE) with "Cloudera Search":http://www.cloudera.com/content/cloudera/en/products-and-services/cdh/search.html.
+This document describes how to integrate and test "Basis Technology's":http://www.basistech.com/ "Rosette Base Linguistics":http://www.basistech.com/base-linguistics/ for Java (RBL-JE) with "Cloudera Search":http://www.cloudera.com/content/cloudera/en/products-and-services/cdh/search.html.
 
 h2. Compatibility
 
