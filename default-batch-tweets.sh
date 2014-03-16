@@ -8,47 +8,49 @@
 set -e
 
 DATASET=default-batch-tweets
+PARCEL=/opt/cloudera/parcels/CDH
+HOME=~$USER
 
-sudo mkdir -p /var/lib/cloudera-demovm
+sudo mkdir -p /var/lib/$USER-demovm
 
-if [ ! -e /var/lib/cloudera-demovm/${DATASET}-generate.done ]; then
-    solrctl instancedir --generate /home/cloudera/${DATASET}_configs
-    cp -f /usr/share/doc/search*/examples/solr-nrt/collection1/conf/schema.xml /home/cloudera/${DATASET}_configs/conf/
-    sudo touch /var/lib/cloudera-demovm/${DATASET}-generate.done
+if [ ! -e /var/lib/$USER-demovm/${DATASET}-generate.done ]; then
+    solrctl instancedir --generate $HOME/${DATASET}_configs
+    cp -f $PARCEL/share/doc/search*/examples/solr-nrt/collection1/conf/schema.xml $HOME/${DATASET}_configs/conf/
+    sudo touch /var/lib/$USER-demovm/${DATASET}-generate.done
 fi
 
-if [ ! -e /var/lib/cloudera-demovm/${DATASET}-create-dir.done ]; then
-    solrctl instancedir --create ${DATASET} /home/cloudera/${DATASET}_configs
-    sudo touch /var/lib/cloudera-demovm/${DATASET}-create-dir.done
+if [ ! -e /var/lib/$USER-demovm/${DATASET}-create-dir.done ]; then
+    solrctl instancedir --create ${DATASET} $HOME/${DATASET}_configs
+    sudo touch /var/lib/$USER-demovm/${DATASET}-create-dir.done
 fi
 
-if [ ! -e /var/lib/cloudera-demovm/${DATASET}-create-collection.done ]; then
+if [ ! -e /var/lib/$USER-demovm/${DATASET}-create-collection.done ]; then
     solrctl collection --create ${DATASET} -s 1
-    sudo touch /var/lib/cloudera-demovm/${DATASET}-create-collection.done
+    sudo touch /var/lib/$USER-demovm/${DATASET}-create-collection.done
 fi
 
 set +e
-hadoop fs -rm -r -skipTrash /user/cloudera/${DATASET}_indir
-hadoop fs -rm -r -skipTrash /user/cloudera/${DATASET}_outdir
+hadoop fs -rm -r -skipTrash /user/$USER/${DATASET}_indir
+hadoop fs -rm -r -skipTrash /user/$USER/${DATASET}_outdir
 set -e
 
-hadoop fs -mkdir -p /user/cloudera/${DATASET}_indir
-hadoop fs -mkdir -p /user/cloudera/${DATASET}_outdir
+hadoop fs -mkdir -p /user/$USER/${DATASET}_indir
+hadoop fs -mkdir -p /user/$USER/${DATASET}_outdir
 
 hadoop fs -copyFromLocal \
-    /usr/share/doc/search*/examples/test-documents/sample-statuses-*.avro \
-    /user/cloudera/${DATASET}_indir/
+    $PARCEL/share/doc/search*/examples/test-documents/sample-statuses-*.avro \
+    /user/$USER/${DATASET}_indir/
 
 solrctl collection --deletedocs ${DATASET}
-hadoop --config /etc/hadoop/conf.cloudera.mapreduce1 \
+hadoop --config /etc/hadoop/conf.$USER.mapreduce1 \
     jar /usr/lib/solr/contrib/mr/search-mr-*-job.jar \
     org.apache.solr.hadoop.MapReduceIndexerTool \
     -D 'mapred.child.java.opts=-Xmx500m' \
-    --log4j /usr/share/doc/search*/examples/solr-nrt/log4j.properties \
-    --morphline-file /usr/share/doc/search*/examples/solr-nrt/test-morphlines/tutorialReadAvroContainer.conf \
-    --output-dir hdfs://localhost.localdomain:8020/user/cloudera/${DATASET}_outdir \
+    --log4j $PARCEL/share/doc/search*/examples/solr-nrt/log4j.properties \
+    --morphline-file $PARCEL/share/doc/search*/examples/solr-nrt/test-morphlines/tutorialReadAvroContainer.conf \
+    --output-dir hdfs://localhost.localdomain:8020/user/$USER/${DATASET}_outdir \
     --verbose --go-live \
     --zk-host localhost.localdomain:2181/solr \
     --collection ${DATASET} \
-    hdfs://localhost.localdomain:8020/user/cloudera/${DATASET}_indir
+    hdfs://localhost.localdomain:8020/user/$USER/${DATASET}_indir
 
