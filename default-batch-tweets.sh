@@ -41,7 +41,7 @@ hadoop fs -copyFromLocal \
     /user/$USER/${DATASET}_indir/
 
 solrctl collection --deletedocs ${DATASET}
-hadoop --config /etc/hadoop/conf.cloudera.yarn\
+hadoop --config /etc/hadoop/conf.cloudera.yarn \
     jar ${PARCEL}/lib/solr/contrib/mr/search-mr-*-job.jar \
     org.apache.solr.hadoop.MapReduceIndexerTool \
     -D 'mapred.child.java.opts=-Xmx500m' \
