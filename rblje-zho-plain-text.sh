@@ -7,7 +7,7 @@
 
 set -e
 
-DATASET=rblje-eng-plain-text
+DATASET=rblje-zho-plain-text
 PARCEL=/opt/cloudera/parcels/CDH
 HOST=ec2-54-197-48-181.compute-1.amazonaws.com
 
