@@ -18,7 +18,7 @@ RBLJE_ROOT=/opt/rblje-$RBLJE_VER
 SLF4J_VER=1.7.5
 LICENSE_FILE_PATH=$RBLJE_ROOT/rbl-je-$RBLJE_VER/licenses/rlp-license.xml
 
-ROOT_DIR=/home/$USER/work/basis-cloudera-tests
+ROOT_DIR=/home/$USER/basis/basis-cloudera-tests
 TEMPLATE_DIR=$ROOT_DIR/config
 SCHEMA_XML=$TEMPLATE_DIR/${DATASET}-schema.xml
 SOLRCONFIG_XML=$TEMPLATE_DIR/${DATASET}-solrconfig.xml
@@ -90,7 +90,7 @@ hadoop --config /etc/hadoop/conf.cloudera.yarn \
     org.apache.solr.hadoop.MapReduceIndexerTool \
     -D 'mapred.child.java.opts=-Xmx500m' \
     --log4j $PARCEL/share/doc/search*/examples/solr-nrt/log4j.properties \
-    --morphline-file $ROOT/config/${DATASET}-morphlines.conf \
+    --morphline-file $ROOT_DIR/config/${DATASET}-morphlines.conf \
     --output-dir hdfs://$HOST:8020/user/$USER/${DATASET}_outdir \
     --verbose --go-live \
     --zk-host $HOST:2181/solr \
