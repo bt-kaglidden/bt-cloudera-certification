@@ -7,23 +7,26 @@
 
 set -e
 
-BT_COMMON_VER=21
 DATASET=rblje-eng-plain-text
+PARCEL=/opt/cloudera/parcels/CDH
+HOST=ec2-54-197-48-181.compute-1.amazonaws.com
+
+BT_COMMON_VER=25
 LUCENE_SOLR_VER=4_3
-RBLJE_VER=2.1.0
+RBLJE_VER=2.2.0
 RBLJE_ROOT=/opt/rblje-$RBLJE_VER
-SLF4J_VER=1.6.3
+SLF4J_VER=1.7.5
 LICENSE_FILE_PATH=$RBLJE_ROOT/rbl-je-$RBLJE_VER/licenses/rlp-license.xml
 
-ROOT_DIR=/home/cloudera/work/basis-cloudera-tests
+ROOT_DIR=/home/$USER/basis/basis-cloudera-tests
 TEMPLATE_DIR=$ROOT_DIR/config
 SCHEMA_XML=$TEMPLATE_DIR/${DATASET}-schema.xml
 SOLRCONFIG_XML=$TEMPLATE_DIR/${DATASET}-solrconfig.xml
-INSTANCE_DIR=/home/cloudera/${DATASET}_configs
+INSTANCE_DIR=/home/$USER/${DATASET}_configs
 
-sudo mkdir -p /var/lib/cloudera-demovm
+sudo mkdir -p /var/lib/$USER-demovm
 
-if [ ! -e /var/lib/cloudera-demovm/${DATASET}-generate.done ]; then
+if [ ! -e /var/lib/$USER-demovm/${DATASET}-generate.done ]; then
      solrctl instancedir --generate $INSTANCE_DIR
      cat $SCHEMA_XML | \
           sed -e "s|\[\[bt.license.path\]\]|$LICENSE_FILE_PATH|g" | \
@@ -37,34 +40,34 @@ if [ ! -e /var/lib/cloudera-demovm/${DATASET}-generate.done ]; then
           sed -e "s|\[\[RBLJE_ROOT\]\]|$RBLJE_ROOT|g" | \
           sed -e "s|\[\[SLF4J_VER\]\]|$SLF4J_VER|g" \
           > $INSTANCE_DIR/conf/solrconfig.xml
-    sudo touch /var/lib/cloudera-demovm/${DATASET}-generate.done
+    sudo touch /var/lib/$USER-demovm/${DATASET}-generate.done
 fi
 
-if [ ! -e /var/lib/cloudera-demovm/${DATASET}-create-dir.done ]; then
-    solrctl instancedir --create $DATASET /home/cloudera/${DATASET}_configs
-    sudo touch /var/lib/cloudera-demovm/${DATASET}-create-dir.done
+if [ ! -e /var/lib/$USER-demovm/${DATASET}-create-dir.done ]; then
+    solrctl instancedir --create ${DATASET} /home/$USER/${DATASET}_configs
+    sudo touch /var/lib/$USER-demovm/${DATASET}-create-dir.done
 fi
 
-if [ ! -e /var/lib/cloudera-demovm/${DATASET}-create-collection.done ]; then
-    solrctl collection --create $DATASET -s 1
-    sudo touch /var/lib/cloudera-demovm/${DATASET}-create-collection.done
+if [ ! -e /var/lib/$USER-demovm/${DATASET}-create-collection.done ]; then
+    solrctl collection --create ${DATASET} -s 1
+    sudo touch /var/lib/$USER-demovm/${DATASET}-create-collection.done
 fi
 
 set +e
-hadoop fs -rm -r -skipTrash /user/cloudera/${DATASET}_indir
-hadoop fs -rm -r -skipTrash /user/cloudera/${DATASET}_outdir
+hadoop fs -rm -r -skipTrash /user/$USER/${DATASET}_indir
+hadoop fs -rm -r -skipTrash /user/$USER/${DATASET}_outdir
 set -e
 
-hadoop fs -mkdir -p /user/cloudera/${DATASET}_indir
-hadoop fs -mkdir -p /user/cloudera/${DATASET}_outdir
+hadoop fs -mkdir -p /user/$USER/${DATASET}_indir
+hadoop fs -mkdir -p /user/$USER/${DATASET}_outdir
 
 hadoop fs -copyFromLocal \
     $ROOT_DIR/documents/doc*.txt \
-    /user/cloudera/${DATASET}_indir/
+    /user/$USER/${DATASET}_indir/
 
 hadoop fs -copyFromLocal \
     $ROOT_DIR/documents/English-*.txt \
-    /user/cloudera/${DATASET}_indir/
+    /user/$USER/${DATASET}_indir/
 
 set +e
 #
@@ -74,22 +77,22 @@ set +e
 #
 hadoop fs -copyFromLocal \
     $ROOT_DIR/documents/eng-*.txt \
-    /user/cloudera/${DATASET}_indir/
+    /user/$USER/${DATASET}_indir/
 
 hadoop fs -copyFromLocal \
     $ROOT_DIR/documents/*_ENG_*.txt \
-    /user/cloudera/${DATASET}_indir/
+    /user/$USER/${DATASET}_indir/
 set -e
 
-solrctl collection --deletedocs $DATASET
-hadoop --config /etc/hadoop/conf.cloudera.mapreduce1 \
-    jar /usr/lib/solr/contrib/mr/search-mr-*-job.jar \
+solrctl collection --deletedocs ${DATASET}
+hadoop --config /etc/hadoop/conf.cloudera.yarn \
+    jar ${PARCEL}/lib/solr/contrib/mr/search-mr-*-job.jar \
     org.apache.solr.hadoop.MapReduceIndexerTool \
-    -D "mapred.child.java.opts=-Xmx500m" \
-    --log4j /usr/share/doc/search*/examples/solr-nrt/log4j.properties \
+    -D 'mapred.child.java.opts=-Xmx500m' \
+    --log4j $PARCEL/share/doc/search*/examples/solr-nrt/log4j.properties \
     --morphline-file $ROOT_DIR/config/${DATASET}-morphlines.conf \
-    --output-dir hdfs://localhost.localdomain:8020/user/cloudera/${DATASET}_outdir \
+    --output-dir hdfs://$HOST:8020/user/$USER/${DATASET}_outdir \
     --verbose --go-live \
-    --zk-host localhost.localdomain:2181/solr \
-    --collection $DATASET \
-    hdfs://localhost.localdomain:8020/user/cloudera/${DATASET}_indir
+    --zk-host $HOST:2181/solr \
+    --collection ${DATASET} \
+    hdfs://$HOST:8020/user/$USER/${DATASET}_indir
