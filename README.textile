@@ -11,7 +11,7 @@ h2. Compatibility
 The following table shows the versions of elasticsearch and Rosette used to build this plugin. 
 
 |_. Cloudera               |_.  RBL-JE   |
-| Cloudera Standard 4.7.2  | 2.1.0             |
+| Cloudera Standard 5.1  | 2.2.2             |
 
 h2. Installation
 
@@ -26,9 +26,9 @@ First, install the contents of this git repositiory.
 
 Next, install RBL-JE.  You can either unpack the contents of the RBL-JE package or run the script _basis-cloudera-tests/install-rblje.sh_. Here is an example usage of this installation script.  Note that _sudo_ is used as we are installing the package in /opt:
 
-bc. sudo install-rblje.sh -r /opt/rblje-2.1.0 -s rbl-distribution-2.1.0.zip -l rlp-license.xml
+bc. sudo install-rblje.sh -r /opt/rblje-2.2.2 -s rbl-je-2.2.2.zip -l rlp-license.xml
 
-NB that "/opt/rblje-2.1.0" in the example above is the root directory of the RBL-JE installation.  The _rblje-*.sh_ scripts set the variable RBLJE_ROOT to this value.  If you install RBL-JE somewhere else, edit the _rblje-*.sh_ scripts to match.
+NB that "/opt/rblje-2.2.2" in the example above is the root directory of the RBL-JE installation.  The _rblje-*.sh_ scripts set the variable RBLJE_ROOT to this value.  If you install RBL-JE somewhere else, edit the _rblje-*.sh_ scripts to match.
  
 h2. Running the tests
 

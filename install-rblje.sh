@@ -12,7 +12,7 @@ function usage {
     echo "    RBLJE_ROOT = directory in which to install RBL-JE"
     echo "    RBLJE_SDK = RLP sdk archive (tar.gz file)"
     echo "    RBLJE_LICENSE = RLP license file (optional)"
-    echo e.g. $0 -r /opt/rblje-2.2.0 -s rbl-distribution-2.2.0.zip -l rlp-license.xml
+    echo e.g. $0 -r /opt/rblje-2.2.2 -s rbl-je-2.2.2.zip -l rlp-license.xml
     echo
 }
 
