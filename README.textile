@@ -11,46 +11,52 @@ h2. Compatibility
 The following table shows the versions of elasticsearch and Rosette used to build this plugin. 
 
 |_. Cloudera               |_.  RBL-JE   |
-| Cloudera Standard 5.1  | 2.2.2             |
+| CDH 5 (5.1)  | 2.2.2             |
 
 h2. Installation
 
-These directions presume that you are using the "Cloudera Starter VM":http://www.cloudera.com/content/cloudera-content/cloudera-docs/DemoVMs/Cloudera-QuickStart-VM/cloudera_quickstart_vm.html.
+These directions presume that you are using the "Cloudera Starter VM for CDH 5":http://www.cloudera.com/content/cloudera-content/cloudera-docs/DemoVMs/Cloudera-QuickStart-VM/cloudera_quickstart_vm.html.
 
 First, install the contents of this git repositiory.  
 # Login as the user _cloudera_.
 # cd ~cloudera
-# mkdir work
-# cd work
+# mkdir basis
+# cd basis
 # git clone https://github.com/bt-kaglidden/basis-cloudera-tests.git
 
-Next, install RBL-JE.  You can either unpack the contents of the RBL-JE package or run the script _basis-cloudera-tests/install-rblje.sh_. Here is an example usage of this installation script.  Note that _sudo_ is used as we are installing the package in /opt:
+Next, install RBL-JE.  You can either unpack the contents of the RBL-JE package or run the script _~cloudera/basis/basis-cloudera-tests/install-rblje.sh_. Here is an example usage of this installation script.  Note that _sudo_ is used as we are installing the package in /opt:
 
-bc. sudo install-rblje.sh -r /opt/rblje-2.2.2 -s rbl-je-2.2.2.zip -l rlp-license.xml
+p((. sudo install-rblje.sh -r /opt/rblje-2.2.2 -s rbl-je-2.2.2.zip -l rlp-license.xml
 
-NB that "/opt/rblje-2.2.2" in the example above is the root directory of the RBL-JE installation.  The _rblje-*.sh_ scripts set the variable RBLJE_ROOT to this value.  If you install RBL-JE somewhere else, edit the _rblje-*.sh_ scripts to match.
+NB that "/opt/rblje-2.2.2" in the example above is the root directory of the RBL-JE installation.  The _rblje-*.sh_ scripts, desribed below, set the variable RBLJE_ROOT to this value.  If you install RBL-JE somewhere else, edit the _rblje-*.sh_ scripts to match.
  
 h2. Running the tests
 
 Scripts are provide that run map-reduce index jobs.  These scripts are named using this convention:
 
-_rblje-&lt;corpus-type&gt;.sh_, where &lt;corpus-type&gt; indicates the type of data that will be indexed.
+_rblje-&lt;corpus-name&gt;.sh_, where &lt;corpus-name&gt; indicates the data that will be indexed.
 
 If you want to undo what these scripts have done, run _undo-solr-collection.sh_, passing it _rblje-&lt;corpus-name&gt;_.
 
-The _batch_tweets_ corpus is the set of tweets that come with the starter VM.  The _&lt;language&gt;-plain-text_ copora, where &lt;language&gt; is a three letter language code, contain plain text files in the given language.
+The _&lt;language&gt;-plain-text_ copora (e.g. _eng-plain-text_), where &lt;language&gt; is a three letter language code, contain plain text files in the given language.
 
 Here is an example of indexing English documents:
-# cd ~cloudera/work/basis-cloudera-tests
+# cd ~cloudera/basis/basis-cloudera-tests
 # ./rblje-eng-plain-text.sh
 
 To undo this, i.e. remove the resultant collection from Solr and clean up intermediate files, run:
-bc. ./undo-solr-collection.sh rblje-eng-plain-text
+
+p((. ./undo-solr-collection.sh rblje-eng-plain-text
 
 Note that the rblje scripts that copy data from the _documents_ directory have commands to copy files that are not provided in this git repository.  These refer to files in corpora that are proprietry to Basis.  Inclusion of these commands is harmless.
 
+h2. Viewing Test Results
+
+The test scripts will load data into Solr collections.  These can be viewed in the Solr Admin UI at this url:
+
+p((. http://quickstart.cloudera:8983/solr/#/
 
 h2. Preparing your own Plain Text files for indexing
 
-The helper script _prepare-plain-text.sh_ is provided in case you want to add your own text files for testing.  Essentially it prepends your files with the name of the file in the format expected by the morphlines configuration files basis-cloudera-tests/config/rblje-&lt;corpus-name&gt;-morphlines.conf.
+Use the helper script _prepare-plain-text.sh_ to add your own text files for testing.  Essentially it prepends your files with the name of the file in the format expected by the morphlines configuration files ~cloudera/basis/basis-cloudera-tests/config/rblje-&lt;corpus-name&gt;-morphlines.conf.
 
