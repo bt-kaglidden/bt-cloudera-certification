@@ -8,12 +8,12 @@
 set -e
 
 DATASET=rblje-eng-plain-text
-PARCEL=/opt/cloudera/parcels/CDH
-HOST=ec2-54-197-48-181.compute-1.amazonaws.com
+PARCEL=/usr
+HOST=localhost
 
-BT_COMMON_VER=25
+BT_COMMON_VER=31
 LUCENE_SOLR_VER=4_3
-RBLJE_VER=2.2.0
+RBLJE_VER=2.2.2
 RBLJE_ROOT=/opt/rblje-$RBLJE_VER
 SLF4J_VER=1.7.5
 LICENSE_FILE_PATH=$RBLJE_ROOT/rbl-je-$RBLJE_VER/licenses/rlp-license.xml
