@@ -11,12 +11,12 @@ DATASET=rblje-zho-plain-text
 PARCEL=/usr
 HOST=localhost
 
-BT_COMMON_VER=31
+BT_COMMON_VER=33
 LUCENE_SOLR_VER=4_3
-RBLJE_VER=2.2.2
+RBLJE_VER=2.3.0
 RBLJE_ROOT=/opt/rblje-$RBLJE_VER
 SLF4J_VER=1.7.5
-LICENSE_FILE_PATH=$RBLJE_ROOT/rbl-je-$RBLJE_VER/licenses/rlp-license.xml
+BT_ROOT=$RBLJE_ROOT/rbl-je-$RBLJE_VER
 
 ROOT_DIR=/home/$USER/basis/basis-cloudera-tests
 TEMPLATE_DIR=$ROOT_DIR/config
@@ -29,9 +29,7 @@ sudo mkdir -p /var/lib/$USER-demovm
 if [ ! -e /var/lib/$USER-demovm/${DATASET}-generate.done ]; then
      solrctl instancedir --generate $INSTANCE_DIR
      cat $SCHEMA_XML | \
-          sed -e "s|\[\[bt.license.path\]\]|$LICENSE_FILE_PATH|g" | \
-          sed -e "s|\[\[bt.model.directory\]\]|$RBLJE_ROOT/rbl-je-$RBLJE_VER/models|g" | \
-          sed -e "s|\[\[bt.dictionary.directory\]\]|$RBLJE_ROOT/rbl-je-$RBLJE_VER/dicts|g" \
+          sed -e "s|\[\[bt.root\]\]|$BT_ROOT|g" \
           > $INSTANCE_DIR/conf/schema.xml
      cat $SOLRCONFIG_XML | \
           sed -e "s|\[\[BT_COMMON_VER\]\]|$BT_COMMON_VER|g" | \

@@ -932,169 +932,265 @@
 
 <!-- Start:Basis RBL-JE field types -->
         <fieldtype name="english-basis" class="solr.TextField">
-            <analyzer>
+            <analyzer type="index">
                 <tokenizer class="com.basistech.rosette.lucene.BaseLinguisticsTokenizerFactory"
                            language="eng"
-                           licensePath="[[bt.license.path]]"
+                           rootDirectory="[[bt.root]]"
                            />
-                >
                 <filter class="com.basistech.rosette.lucene.BaseLinguisticsTokenFilterFactory"
                         language="eng"
-                        licensePath="[[bt.license.path]]"
-                        dictionaryDirectory="[[bt.dictionary.directory]]"
+                        rootDirectory="[[bt.root]]"
+                        addLemmaTokens="true"/>
+            </analyzer>
+            <analyzer type="query">
+                <tokenizer class="com.basistech.rosette.lucene.BaseLinguisticsTokenizerFactory"
+                           language="eng"
+                           rootDirectory="[[bt.root]]"
+                           />
+                <filter class="com.basistech.rosette.lucene.BaseLinguisticsTokenFilterFactory"
+                        language="eng"
+                        rootDirectory="[[bt.root]]"
+                        query="true"
                         addLemmaTokens="true"/>
             </analyzer>
         </fieldtype>
 
         <fieldtype name="french-basis" class="solr.TextField">
-            <analyzer>
+            <analyzer type="index">
                 <tokenizer class="com.basistech.rosette.lucene.BaseLinguisticsTokenizerFactory"
                            language="fra"
-                           licensePath="[[bt.license.path]]"
+                           rootDirectory="[[bt.root]]"
                         />
-                >
                 <filter class="com.basistech.rosette.lucene.BaseLinguisticsTokenFilterFactory"
                         language="fra"
-                        licensePath="[[bt.license.path]]"
-                        dictionaryDirectory="[[bt.dictionary.directory]]"
+                        rootDirectory="[[bt.root]]"
+                        addLemmaTokens="true"/>
+            </analyzer>
+            <analyzer type="query">
+                <tokenizer class="com.basistech.rosette.lucene.BaseLinguisticsTokenizerFactory"
+                           language="fra"
+                           rootDirectory="[[bt.root]]"
+                        />
+                <filter class="com.basistech.rosette.lucene.BaseLinguisticsTokenFilterFactory"
+                        language="fra"
+                        rootDirectory="[[bt.root]]"
+                        query="true"
                         addLemmaTokens="true"/>
             </analyzer>
         </fieldtype>
 
         <fieldtype name="spanish-basis" class="solr.TextField">
-            <analyzer>
+            <analyzer type="index">
                 <tokenizer class="com.basistech.rosette.lucene.BaseLinguisticsTokenizerFactory"
                            language="spa"
-                           licensePath="[[bt.license.path]]"
+                           rootDirectory="[[bt.root]]"
                         />
-                >
                 <filter class="com.basistech.rosette.lucene.BaseLinguisticsTokenFilterFactory"
                         language="spa"
-                        licensePath="[[bt.license.path]]"
-                        dictionaryDirectory="[[bt.dictionary.directory]]"
+                        rootDirectory="[[bt.root]]"
+                        addLemmaTokens="true"/>
+            </analyzer>
+            <analyzer type="query">
+                <tokenizer class="com.basistech.rosette.lucene.BaseLinguisticsTokenizerFactory"
+                           language="spa"
+                           rootDirectory="[[bt.root]]"
+                        />
+                <filter class="com.basistech.rosette.lucene.BaseLinguisticsTokenFilterFactory"
+                        language="spa"
+                        rootDirectory="[[bt.root]]"
+                        query="true"
                         addLemmaTokens="true"/>
             </analyzer>
         </fieldtype>
 
         <fieldtype name="german-basis" class="solr.TextField">
-            <analyzer>
+            <analyzer type="index">
                 <tokenizer class="com.basistech.rosette.lucene.BaseLinguisticsTokenizerFactory"
                            language="deu"
-                           licensePath="[[bt.license.path]]"
+                           rootDirectory="[[bt.root]]"
                         />
-                >
                 <filter class="com.basistech.rosette.lucene.BaseLinguisticsTokenFilterFactory"
                         language="deu"
-                        licensePath="[[bt.license.path]]"
-                        dictionaryDirectory="[[bt.dictionary.directory]]"
+                        rootDirectory="[[bt.root]]"
+                        addLemmaTokens="true"/>
+            </analyzer>
+            <analyzer type="query">
+                <tokenizer class="com.basistech.rosette.lucene.BaseLinguisticsTokenizerFactory"
+                           language="deu"
+                           rootDirectory="[[bt.root]]"
+                        />
+                <filter class="com.basistech.rosette.lucene.BaseLinguisticsTokenFilterFactory"
+                        language="deu"
+                        rootDirectory="[[bt.root]]"
+			query="true"
                         addLemmaTokens="true"/>
             </analyzer>
         </fieldtype>
 
         <fieldtype name="danish-basis" class="solr.TextField">
-            <analyzer>
+            <analyzer type="index">
                 <tokenizer class="com.basistech.rosette.lucene.BaseLinguisticsTokenizerFactory"
                            language="dan"
-                           licensePath="[[bt.license.path]]"
+                           rootDirectory="[[bt.root]]"
                         />
-                >
                 <filter class="com.basistech.rosette.lucene.BaseLinguisticsTokenFilterFactory"
                         language="dan"
-                        licensePath="[[bt.license.path]]"
-                        dictionaryDirectory="[[bt.dictionary.directory]]"
+                        rootDirectory="[[bt.root]]"
+                        addLemmaTokens="true"/>
+            </analyzer>
+            <analyzer type="query">
+                <tokenizer class="com.basistech.rosette.lucene.BaseLinguisticsTokenizerFactory"
+                           language="dan"
+                           rootDirectory="[[bt.root]]"
+                        />
+                <filter class="com.basistech.rosette.lucene.BaseLinguisticsTokenFilterFactory"
+                        language="dan"
+                        rootDirectory="[[bt.root]]"
+                        query="true"
                         addLemmaTokens="true"/>
             </analyzer>
         </fieldtype>
 
         <fieldtype name="russian-basis" class="solr.TextField">
-            <analyzer>
+            <analyzer type="index">
                 <tokenizer class="com.basistech.rosette.lucene.BaseLinguisticsTokenizerFactory"
                            language="rus"
-                           licensePath="[[bt.license.path]]"
+                           rootDirectory="[[bt.root]]"
                         />
-                >
                 <filter class="com.basistech.rosette.lucene.BaseLinguisticsTokenFilterFactory"
                         language="rus"
-                        licensePath="[[bt.license.path]]"
-                        dictionaryDirectory="[[bt.dictionary.directory]]"
+                        rootDirectory="[[bt.root]]"
+                        addLemmaTokens="true"/>
+            </analyzer>
+            <analyzer type="query">
+                <tokenizer class="com.basistech.rosette.lucene.BaseLinguisticsTokenizerFactory"
+                           language="rus"
+                           rootDirectory="[[bt.root]]"
+                        />
+                <filter class="com.basistech.rosette.lucene.BaseLinguisticsTokenFilterFactory"
+                        language="rus"
+                        rootDirectory="[[bt.root]]"
+			query="true"
                         addLemmaTokens="true"/>
             </analyzer>
         </fieldtype>
 
         <fieldtype name="polish-basis" class="solr.TextField">
-            <analyzer>
+            <analyzer type="index">
                 <tokenizer class="com.basistech.rosette.lucene.BaseLinguisticsTokenizerFactory"
                            language="pol"
-                           licensePath="[[bt.license.path]]"
+                           rootDirectory="[[bt.root]]"
                         />
-                >
                 <filter class="com.basistech.rosette.lucene.BaseLinguisticsTokenFilterFactory"
                         language="pol"
-                        licensePath="[[bt.license.path]]"
-                        dictionaryDirectory="[[bt.dictionary.directory]]"
+                        rootDirectory="[[bt.root]]"
+                        addLemmaTokens="true"/>
+            </analyzer>
+            <analyzer type="query">
+                <tokenizer class="com.basistech.rosette.lucene.BaseLinguisticsTokenizerFactory"
+                           language="pol"
+                           rootDirectory="[[bt.root]]"
+                        />
+                <filter class="com.basistech.rosette.lucene.BaseLinguisticsTokenFilterFactory"
+                        language="pol"
+                        rootDirectory="[[bt.root]]"
+			query="true"
                         addLemmaTokens="true"/>
             </analyzer>
         </fieldtype>
 
         <fieldtype name="greek-basis" class="solr.TextField">
-            <analyzer>
+            <analyzer type="index">
                 <tokenizer class="com.basistech.rosette.lucene.BaseLinguisticsTokenizerFactory"
                            language="ell"
-                           licensePath="[[bt.license.path]]"
+                           rootDirectory="[[bt.root]]"
                         />
-                >
                 <filter class="com.basistech.rosette.lucene.BaseLinguisticsTokenFilterFactory"
                         language="ell"
-                        licensePath="[[bt.license.path]]"
-                        dictionaryDirectory="[[bt.dictionary.directory]]"
+                        rootDirectory="[[bt.root]]"
+                        addLemmaTokens="true"/>
+            </analyzer>
+            <analyzer type="query">
+                <tokenizer class="com.basistech.rosette.lucene.BaseLinguisticsTokenizerFactory"
+                           language="ell"
+                           rootDirectory="[[bt.root]]"
+                        />
+                <filter class="com.basistech.rosette.lucene.BaseLinguisticsTokenFilterFactory"
+                        language="ell"
+                        rootDirectory="[[bt.root]]"
+			query="true"
                         addLemmaTokens="true"/>
             </analyzer>
         </fieldtype>
 
         <fieldtype name="chinese-basis" class="solr.TextField">
-            <analyzer>
+            <analyzer type="index">
                 <tokenizer class="com.basistech.rosette.lucene.BaseLinguisticsTokenizerFactory"
                            language="zhs"
-                           licensePath="[[bt.license.path]]"
-                           modelDirectory="[[bt.model.directory]]"
+                           rootDirectory="[[bt.root]]"
                         />
-                >
                 <filter class="com.basistech.rosette.lucene.BaseLinguisticsTokenFilterFactory"
                         language="zhs"
-                        licensePath="[[bt.license.path]]"
-                        dictionaryDirectory="[[bt.dictionary.directory]]"
+                        rootDirectory="[[bt.root]]"
+                        addLemmaTokens="true"/>
+            </analyzer>
+            <analyzer type="query">
+                <tokenizer class="com.basistech.rosette.lucene.BaseLinguisticsTokenizerFactory"
+                           language="zhs"
+                           rootDirectory="[[bt.root]]"
+                        />
+                <filter class="com.basistech.rosette.lucene.BaseLinguisticsTokenFilterFactory"
+                        language="zhs"
+                        rootDirectory="[[bt.root]]"
+			query="true"
                         addLemmaTokens="true"/>
             </analyzer>
         </fieldtype>
 
         <fieldtype name="japanese-basis" class="solr.TextField">
-            <analyzer>
+            <analyzer type="index">
                 <tokenizer class="com.basistech.rosette.lucene.BaseLinguisticsTokenizerFactory"
                            language="jpn"
-                           licensePath="[[bt.license.path]]"
-                           modelDirectory="[[bt.model.directory]]"
+                           rootDirectory="[[bt.root]]"
                         />
-                >
                 <filter class="com.basistech.rosette.lucene.BaseLinguisticsTokenFilterFactory"
                         language="jpn"
-                        licensePath="[[bt.license.path]]"
-                        dictionaryDirectory="[[bt.dictionary.directory]]"
+                        rootDirectory="[[bt.root]]"
+                        addLemmaTokens="true"/>
+            </analyzer>
+            <analyzer type="query">
+                <tokenizer class="com.basistech.rosette.lucene.BaseLinguisticsTokenizerFactory"
+                           language="jpn"
+                           rootDirectory="[[bt.root]]"
+                        />
+                <filter class="com.basistech.rosette.lucene.BaseLinguisticsTokenFilterFactory"
+                        language="jpn"
+                        rootDirectory="[[bt.root]]"
+			query="true"
                         addLemmaTokens="true"/>
             </analyzer>
         </fieldtype>
 
         <fieldtype name="korean-basis" class="solr.TextField">
-            <analyzer>
+            <analyzer type="index">
                 <tokenizer class="com.basistech.rosette.lucene.BaseLinguisticsTokenizerFactory"
                            language="kor"
-                           licensePath="[[bt.license.path]]"
-                           modelDirectory="[[bt.model.directory]]"
+                           rootDirectory="[[bt.root]]"
                         />
-                >
                 <filter class="com.basistech.rosette.lucene.BaseLinguisticsTokenFilterFactory"
                         language="kor"
-                        licensePath="[[bt.license.path]]"
-                        dictionaryDirectory="[[bt.dictionary.directory]]"
+                        rootDirectory="[[bt.root]]"
+                        addLemmaTokens="true"/>
+            </analyzer>
+            <analyzer type="query">
+                <tokenizer class="com.basistech.rosette.lucene.BaseLinguisticsTokenizerFactory"
+                           language="kor"
+                           rootDirectory="[[bt.root]]"
+                        />
+                <filter class="com.basistech.rosette.lucene.BaseLinguisticsTokenFilterFactory"
+                        language="kor"
+                        rootDirectory="[[bt.root]]"
+			query="true"
                         addLemmaTokens="true"/>
             </analyzer>
         </fieldtype>
